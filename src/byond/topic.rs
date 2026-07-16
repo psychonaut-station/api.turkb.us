@@ -33,7 +33,7 @@ pub async fn topic(address: &str, data: &str) -> Result<Response, Error> {
     packet.push(0x00);
 
     let address: SocketAddr = address.parse()?;
-    let mut stream = timeout(Duration::from_secs(5), TcpStream::connect(address)).await??;
+    let mut stream = timeout(Duration::from_secs(1), TcpStream::connect(address)).await??;
     stream.write_all(&packet).await?;
 
     let mut response_header = [0; BYOND_PACKET_HEADER_SIZE];
